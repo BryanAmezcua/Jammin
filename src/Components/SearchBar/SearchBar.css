@@ -114,8 +114,10 @@
 .SearchButton {
   cursor: pointer;
   position: relative;
+  left: 42%;
   width: 8.11rem;
   padding: .77rem 0;
+  margin-bottom: 0.5rem;
   border-radius: 54px;
   background-color: #010c3f;
   text-align: center;
@@ -128,4 +130,44 @@
 
 .SearchButton:hover {
   background-color: rgba(108, 65, 233, .7);
+}
+
+/* ///////////////////////////////////////////////////////////
+------------------------- MOBILE CSS ----------------------
+///////////////////////////////////////////////////////////*/
+
+@media only screen and (max-width: 600px) {
+  .SearchButton {
+    cursor: pointer;
+    position: relative;
+    left: 22%;
+    width: 8.11rem;
+    padding: .77rem 0;
+    margin-bottom: 0.5rem;
+    border-radius: 54px;
+    background-color: #010c3f;
+    text-align: center;
+    font-size: .833rem;
+    transition: background-color .25s;
+    border: 0px;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .container {
+    position: relative;
+    margin: auto;
+    top: 0;
+    left: -24px;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    height: 100px;
+  }
+
+  .container input:focus ~ .search {
+    right: -250px;
+    background: #151515;
+    z-index: 6;
+  }
 }
