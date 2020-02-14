@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
     this.state = {
       searchResults: [],
-      playlistName: 'New Test Playlist',
+      playlistName: '',
       playlistTracks: []
     };
 
@@ -51,19 +51,20 @@ class App extends Component {
   }
 
   updatePlaylistName(name) {
-    this.setState({playlistName: name})
+    this.setState({playlistName: name});
+    console.log(this.state.playlistName)
   }
 
   savePlaylist() {
     let trackURIs = [];
-
     this.state.playlistTracks.forEach(track => trackURIs.push(track.id));
-    return trackURIs;
+
+    Spotify.savePlaylist(this.state.playlistName, trackURIs);
   }
 
   searchSpotify(term) {
     Spotify.search(term).then(tracks => { // Pass search term to API call
-      this.setState({ searchResults: tracks}); // Store resulting data into "SearchResults"
+      this.setState({ searchResults: tracks}); // Store resulting data into "SearchResults" array
     });
   }
 
@@ -74,6 +75,7 @@ class App extends Component {
         <div className="App">
           <SearchBar 
             onSearch={ this.searchSpotify }
+            onSave = { this.savePlaylist }
           />
           <div className="App-playlist">
             <SearchResults 

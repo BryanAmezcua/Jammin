@@ -6,6 +6,7 @@ class SearchBar extends Component {
 
     constructor(props) {
         super(props);
+        //function binding
         this.handleTermChange = this.handleTermChange.bind(this);
         this.search = this.search.bind(this);
     }
@@ -34,4 +35,4 @@ class SearchBar extends Component {
     }
 }
 
-export default SearchBar
+export default SearchBar;

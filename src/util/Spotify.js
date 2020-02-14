@@ -49,7 +49,7 @@ const Spotify = {
 
     async search(term) {
         let token = Spotify.getAccessToken();
-        return fetch(`${spotifySearchAPI}?type=track&q=${term}&limit=3`, {headers: this.buildAuthorizationHeader()})
+        return fetch(`${spotifySearchAPI}?type=track&q=${term}&limit=10`, {headers: this.buildAuthorizationHeader()})
             .then(response => response.json())
             .then(jsonResponse => {
                 if (jsonResponse.tracks) {
@@ -60,7 +60,6 @@ const Spotify = {
                             artist: track.artists[0].name,
                             album: track.album.name,
                             uri: track.uri
-
                         }
                     })
                 } else {
@@ -69,6 +68,37 @@ const Spotify = {
                 }
             })
             .catch(error => console.log(error))
+    },
+
+    async savePlaylist(playlistName, trackURIs) {
+        if (playlistName === '' || (trackURIs === null || trackURIs === undefined)) {
+            console.log('Playlist Name is not set OR track IDs are not accounted for.')
+            return;
+        } else {
+            let clientID = '';
+            // fetch current users Spotify ID
+            fetch(spotifyUserProfileAPI, {headers: this.buildAuthorizationHeader()})
+                .then(response => response.json())
+                .then(jsonResponse => clientID = jsonResponse.id)
+                .then(clientID => {
+
+                    let createSpotifyPlaylistAPI = `https://api.spotify.com/v1/users/${clientID}/playlists`;
+                    let data = {
+                        name: playlistName,
+                    }
+
+                    fetch(createSpotifyPlaylistAPI, {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`,
+                            'Content-Type': 'application/json'
+                        }
+
+                    }).then(response => console.log(response.json())) // TO-DO: Grab playlist ID from all this data and store it in a var to make another API call -- https://developer.spotify.com/documentation/web-api/reference/playlists/add-tracks-to-playlist/
+                })
+                .catch(error => console.log(error));    
+        }
     }
 };
 

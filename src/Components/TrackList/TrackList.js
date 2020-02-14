@@ -25,4 +25,4 @@ class TrackList extends Component {
     }
 }
 
-export default TrackList
+export default TrackList;
