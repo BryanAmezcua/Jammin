@@ -86,6 +86,7 @@ const Spotify = {
                     let data = {
                         name: playlistName,
                     }
+                    let playlistID = '';
 
                     fetch(createSpotifyPlaylistAPI, {
                         method: 'POST',
@@ -95,7 +96,32 @@ const Spotify = {
                             'Content-Type': 'application/json'
                         }
 
-                    }).then(response => console.log(response.json())) // TO-DO: Grab playlist ID from all this data and store it in a var to make another API call -- https://developer.spotify.com/documentation/web-api/reference/playlists/add-tracks-to-playlist/
+                    }).then(response => response.json()) // TO-DO: Grab playlist ID from all this data and store it in a var to make another API call
+                      .then(jsonResponse => playlistID = jsonResponse.id)
+                      .then(playlistID => {
+
+                          let addSongsToPlaylistAPI = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`; // URL that will add tracks to the created playlist
+
+                          let data = { // this is where all Track URIs are added
+                              'uris': []
+                          };
+
+                          trackURIs.forEach(trackURI => { // for each track URI, push it into an array at the end of a pre-determined string
+                            data['uris'].push('spotify:track:' + trackURI);
+                          })
+
+                          fetch(addSongsToPlaylistAPI, { // this is where songs are added to the newly created playlist
+                            method: 'POST',
+                            body: JSON.stringify(data['uris']),
+                            headers: {
+                                Authorization: `Bearer ${accessToken}`,
+                                'Content-Type': 'application/json'
+                            }
+
+                          }).then(response => console.log(response.json()))
+                            .catch(error => console.log(error))
+                            
+                      }).catch(error => console.log(error))
                 })
                 .catch(error => console.log(error));    
         }
