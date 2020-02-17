@@ -117,7 +117,7 @@
   left: 42%;
   width: 8.11rem;
   padding: .77rem 0;
-  margin-bottom: 0.5rem;
+  margin: 3% 0% 3% 0%;
   border-radius: 54px;
   background-color: #010c3f;
   text-align: center;
@@ -158,7 +158,7 @@
     position: relative;
     margin: auto;
     top: 0;
-    left: -24px;
+    left: -6%;
     right: 0;
     bottom: 0;
     width: 300px;
@@ -169,5 +169,12 @@
     right: -250px;
     background: #151515;
     z-index: 6;
+  }
+
+  #searchTerm {
+    width: 65%;
+    position: absolute;
+    left: -6%;
+    font-size: 10px;
   }
 }

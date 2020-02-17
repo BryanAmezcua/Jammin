@@ -35,3 +35,17 @@
     font-weight: 300;
     color: rgba(256, 256, 256, 0.8);
   }
+
+  /* ///////////////////////////////////////////////////////////
+------------------------- MOBILE CSS ----------------------
+///////////////////////////////////////////////////////////*/
+
+
+  @media only screen and (max-width: 600px) {
+    .Track {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(256, 256, 256, 0.8);
+      padding: 10% 0%;
+    }
+  }
