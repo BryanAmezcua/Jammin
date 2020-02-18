@@ -39,7 +39,7 @@
 
 @media only screen and (max-width: 1020px) {
   .SearchResults {
-    width: 95%;
+    width: 17rem;
     margin-bottom: 2rem;
   }
 }

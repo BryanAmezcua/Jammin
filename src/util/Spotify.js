@@ -17,11 +17,7 @@ const Spotify = {
 
     getAccessToken() {
 
-
-        if (accessToken) {
-            // access token already exists
-            return accessToken;
-        } else if (window.location.href.indexOf('access_token') !== -1) {
+        if (window.location.href.indexOf('access_token') !== -1) {
 
             // access token is in URL, grab it
             let url = window.location.href;
@@ -39,12 +35,16 @@ const Spotify = {
             window.history.pushState('Access Token', null, '/');
 
             return accessToken;
-        } else {
+        } else if (accessToken === '') {
+
             // Redirect user to grant autorization from Spotify
             console.log('Redirecting to Spotify...');
             document.cookie="access=true";
             let endPoint = `${spotifyAuthorizationURL}${client_id}&redirect_uri=${redirect_uri}&response_type=token&scope=playlist-modify-public&state=${state}`;
             window.location.href = endPoint;
+
+        } else if (accessToken) {
+            return accessToken;
         }
     },
 
