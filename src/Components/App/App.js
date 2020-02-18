@@ -71,7 +71,7 @@ class App extends Component {
   }
 
   logIn() {
-    if (this.state.isLoggedIn) {
+    if (this.state.isLoggedIn === false) {
       this.setState({ isLoggedIn: true });
     } else {
       return;

@@ -26,7 +26,7 @@ class SearchBar extends Component {
         if (this.props.isLoggedIn) {
             return <button className="SearchButton" onClick={ this.search }>SEARCH</button>
         } else {
-            return <button className="SearchButton" style={{ width: "9rem", left: "42%"}} onClick={ this.logIn }>Log in to Spotify</button>
+            return <button className="SearchButton" onClick={ this.logIn }>Log in to Spotify</button>
         }
     }
 
