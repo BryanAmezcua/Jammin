@@ -2,6 +2,16 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(256, 256, 256, 0.8);
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+  }
+
+  @keyframes animatebottom { 
+    from{ bottom:-100px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
   }
   
   .Track-action {
@@ -24,6 +34,11 @@
     flex-direction: column;
     justify-content: center;
     height: 72px;
+  }
+
+  .Track-information audio {
+    margin: 1% 0%;
+    padding: 1% 0%;
   }
   
   .Track-information h3 {

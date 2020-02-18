@@ -10,7 +10,6 @@ class SearchBar extends Component {
         this.handleTermChange = this.handleTermChange.bind(this);
         this.search = this.search.bind(this);
         this.checkLogIn = this.checkLogIn.bind(this);
-        this.logIn = this.logIn.bind(this);
     }
 
     handleTermChange(event) { // get the value inside of the input field and pass is to the "search Spotify" function inside of App.js
@@ -26,12 +25,8 @@ class SearchBar extends Component {
         if (this.props.isLoggedIn) {
             return <button className="SearchButton" onClick={ this.search }>SEARCH</button>
         } else {
-            return <button className="SearchButton" onClick={ this.logIn }>Log in to Spotify</button>
+            return <button className="SearchButton" onClick={ this.props.logIn }>Log in to Spotify</button>
         }
-    }
-
-    logIn() {
-        this.props.logIn();
     }
 
     render() {

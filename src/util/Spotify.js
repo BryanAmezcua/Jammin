@@ -16,10 +16,13 @@ let expiresIn = '';
 const Spotify = {
 
     getAccessToken() {
+
+
         if (accessToken) {
             // access token already exists
             return accessToken;
         } else if (window.location.href.indexOf('access_token') !== -1) {
+
             // access token is in URL, grab it
             let url = window.location.href;
             let data = url.split('&');
@@ -28,17 +31,20 @@ const Spotify = {
             accessToken = accessToken[1];
             expiresIn = data[2].split("expires_in=");
             expiresIn = expiresIn[1];
+
+            console.log('Access Token Has Been Retrieved...');
             
             // Clear access token from URL and delete it from window history
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
             window.history.pushState('Access Token', null, '/');
 
-            console.log('Access Token Has Been Retrieved');
             return accessToken;
         } else {
             // Redirect user to grant autorization from Spotify
+            console.log('Redirecting to Spotify...');
+            document.cookie="access=true";
             let endPoint = `${spotifyAuthorizationURL}${client_id}&redirect_uri=${redirect_uri}&response_type=token&scope=playlist-modify-public&state=${state}`;
-            window.location.replace(endPoint);
+            window.location.href = endPoint;
         }
     },
 
@@ -48,18 +54,21 @@ const Spotify = {
     },
 
     async search(term) {
-        let token = Spotify.getAccessToken();
+        document.querySelector(".loader").style.display = 'block'; // show loading wheel before API data is rendered on screen
         return fetch(`${spotifySearchAPI}?type=track&q=${term}&limit=10`, {headers: this.buildAuthorizationHeader()})
             .then(response => response.json())
             .then(jsonResponse => {
                 if (jsonResponse.tracks) {
+                    console.log(jsonResponse.tracks)
                     return jsonResponse.tracks.items.map(track => {
+                        document.querySelector(".loader").style.display = 'none' // hide loading wheel - data is ready
                         return {
                             id: track.id,
                             name: track.name,
                             artist: track.artists[0].name,
                             album: track.album.name,
-                            uri: track.uri
+                            uri: track.uri,
+                            preview_url: track.preview_url
                         }
                     })
                 } else {
@@ -72,7 +81,7 @@ const Spotify = {
 
     async savePlaylist(playlistName, trackURIs) {
         if (playlistName === '' || (trackURIs === null || trackURIs === undefined)) {
-            console.log('Playlist Name is not set OR track IDs are not accounted for.')
+            console.log('Playlist Name is not set OR you have not selected any tracks!')
             return;
         } else {
             let clientID = '';

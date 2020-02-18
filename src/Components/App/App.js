@@ -62,6 +62,7 @@ class App extends Component {
     this.state.playlistTracks.forEach(track => trackURIs.push(track.id));
 
     Spotify.savePlaylist(this.state.playlistName, trackURIs);
+    document.querySelector(".successModal").style.display = 'block';
   }
 
   searchSpotify(term) {
@@ -71,11 +72,9 @@ class App extends Component {
   }
 
   logIn() {
-    if (this.state.isLoggedIn === false) {
-      this.setState({ isLoggedIn: true });
-    } else {
-      return;
-    }
+    Spotify.getAccessToken();
+    this.setState({ isLoggedIn: true })
+    console.log(this.state.isLoggedIn);
   }
 
   render() {
@@ -93,6 +92,7 @@ class App extends Component {
             <SearchResults 
               searchResults={ this.state.searchResults } 
               onAdd={ this.addTrack }
+              isLoading = { true }
             />
             <PlayList 
               playlistName={ this.state.playlistName } 

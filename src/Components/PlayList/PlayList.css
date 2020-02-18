@@ -45,6 +45,43 @@
     background: transparent;
 }
 
+/* --- Start: Success Modal CSS ---*/
+
+.successModal {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 75%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.successModal h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.successModal .close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  transition: all 200ms;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.successModal .close:hover {
+  color: #06D85F;
+}
+.successModal .content {
+  max-height: 60%;
+  overflow: auto;
+}
+
+/* --- End: Success Modal CSS ---*/
+
 @media only screen and (max-width: 1020px) {
   .Playlist {
     width: 90%;
