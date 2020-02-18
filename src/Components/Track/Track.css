@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(256, 256, 256, 0.8);
-  padding: 10% 0%;
+  padding: 0% 0% 8%;
+  height: 7rem;
   position: relative;
   -webkit-animation-name: animatebottom;
   -webkit-animation-duration: 1s;
@@ -40,8 +41,8 @@
 .Track-information audio {
   position: absolute;
   top: 75%;
-  width: 15rem;
-  height: 2rem;
+  width: 18rem;
+  height: 1.5rem;
 }
 
 .Track-information h3 {
